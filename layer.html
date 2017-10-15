@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Distributed Systems Visualizer</title>
+<title>Warehouse Map</title>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="./renderer.js"> </script>
 <link rel="stylesheet" type="text/css" href="./style.css">
@@ -37,12 +37,12 @@
      width: 100%;
  }
 
- .infected {
+ .active {
      background-color: #92CD00;
      animation:pulse 0.2s 0s alternate;
  }
 
- .inactive {
+ .overloaded {
      background-color: #FFCF79;
      animation:pulse 0.2s 0s alternate;
  }
@@ -51,10 +51,30 @@
      from { box-shadow:0px 0px 10px 3px #E5E4D7; }
      to { box-shadow:0px 0px 20px 5px #E5E4D7; }
  }
+
 </style>
 </head>
 <body>
-  <div id="status-bar"></div>
-  <div id="container"></div>
+    <div id="status-bar"></div>
+    <div id="container">
+        <div class="row">
+            <div class="cell" id="0" data="50"></div>
+            <div class="cell" id="1" data="50"></div>
+            <div class="cell" id="2" data="50"></div>
+            <div class="cell" id="3" data="50"></div>
+            <div class="cell" id="4" data="50"></div>
+        </div>
+        <div class="row">
+            <div class="cell" id="5" data="50"></div>
+            <div class="cell" id="6" data="50"></div>
+            <div class="cell" id="7" data="50"></div>
+        </div>
+        <div class="row">
+            <div class="cell" id="8" data="50"></div>
+            <div class="cell" id="9" data="50"></div>
+            <div class="cell" id="10" data="50"></div>
+            <div class="cell" id="11" data="50"></div>
+        </div>
+    </div>
 </body>
 </html>

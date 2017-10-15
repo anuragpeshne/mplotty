@@ -1,6 +1,7 @@
 const STATIC_PORT = 8080;
 const SOCKET_PORT = 8081;
-const ANIM_DELAY  = 50;
+const REFRESH_DELAY  = 50;
+const SPEED = 100;
 
 commandq = [];
 inpEof = false;
@@ -44,12 +45,21 @@ wss.on('connection', function connection(ws) {
     console.log('received: %s', message);
   });
 
+  var real_time = (new Date).getTime();
+  var last_log_time = 0;
   setInterval(function() {
     if (commandq.length > 0) {
-      ws.send(JSON.stringify(commandq[0]));
-      commandq.splice(0, 1);
+      if (last_log_time == 0) last_log_time = parseInt(commandq[0][0]);
+      var log_delay = parseInt(commandq[0][0]) - last_log_time;
+      var real_delay = (new Date).getTime() - real_time;
+      if (real_delay > (log_delay / SPEED)) {
+        ws.send(JSON.stringify(commandq[0]));
+        last_log_time = parseInt(commandq[0][0])
+        commandq.splice(0, 1);
+      }
+      real_time = (new Date).getTime();
     } else if (inpEof) {
       process.exit();
     }
-  }, (ANIM_DELAY / Math.log(commandq.length)));
+  }, REFRESH_DELAY);
 });
