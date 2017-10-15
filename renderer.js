@@ -33,7 +33,7 @@ connection.onmessage = function (message) {
             $('#' + sender_id).addClass("active");
         }
         $('#' + sender_id).data('state', state);
-        $('#' + receiver_id).attr('title', state);
+        $('#' + sender_id).attr('title', state);
         break;
 
     case "receive":
@@ -59,7 +59,7 @@ $(document).ready(function() {
     function updateChart() {
         $('#chartContainer').html("");
         for (var i = 0; i < cell_count; i++) {
-            var usage = $('#' + i).data("state");
+            var usage = $('#' + i).data("state") || 0;
             $("<div></div>").html(i + ":" + usage).appendTo("#chartContainer");
         }
     }

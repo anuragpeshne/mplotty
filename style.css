@@ -21,15 +21,19 @@ body {
 
 .cell {
     float: left;
-    width: 15px;
-    height: 15px;
+    width: 25px;
+    height: 25px;
     border: solid 1px #ccc;
     border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
 }
 
 .row {
     float: left;
     width: 100%;
+    margin-top: 20px;
+    border: dotted #ddd 1px;
 }
 
 .active {
@@ -50,4 +54,10 @@ body {
 #chartContainer {
     position: fixed;
     left: 90%;
+    padding: 10px;
+    border: solid #aaa 1px;
+    border-radius: 5px;
+    max-height: 90%;
+    width: 100%;
+    overflow-y: scroll;
 }
