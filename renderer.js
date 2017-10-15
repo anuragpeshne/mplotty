@@ -55,12 +55,31 @@ connection.onmessage = function (message) {
 };
 
 $(document).ready(function() {
+    function getChart(usage) {
+        var graph = "[";
+        for (var i = 0; i < Math.floor(usage / 10); i++) {
+            graph += "#";
+        }
+        for (var i = 0; i < 10 - Math.floor(usage / 10); i++) {
+            graph += "&nbsp;";
+        }
+        return graph + "]";
+    }
+
+    function to2(i) {
+        if (i < 10) return "0" + i; else return "" + i;
+    }
+
+    function to3(i) {
+        if (i < 100) return "0" + to2(i); else return to2(i);
+    }
+
     var cell_count = $(".cell").length;
     function updateChart() {
         $('#chartContainer').html("");
         for (var i = 0; i < cell_count; i++) {
             var usage = $('#' + i).data("state") || 0;
-            $("<div></div>").html(i + ":" + usage).appendTo("#chartContainer");
+            $("<div></div>").html(to2(i) + ":" + to3(usage) + "% " + getChart(usage)).appendTo("#chartContainer");
         }
     }
     window.setInterval(updateChart, CHART_FREQ);
