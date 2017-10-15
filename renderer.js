@@ -1,4 +1,5 @@
 const SOCKET_PORT = 8081
+const CHART_FREQ = 2000
 window.WebSocket = window.WebSocket || window.MozWebSocket;
 
 var connection = new WebSocket('ws://127.0.0.1:' + SOCKET_PORT);
@@ -32,6 +33,7 @@ connection.onmessage = function (message) {
             $('#' + sender_id).addClass("active");
         }
         $('#' + sender_id).data('state', state);
+        $('#' + receiver_id).attr('title', state);
         break;
 
     case "receive":
@@ -44,9 +46,22 @@ connection.onmessage = function (message) {
             $('#' + receiver_id).addClass("active");
         }
         $('#' + receiver_id).data('state', state);
+        $('#' + receiver_id).attr('title', state);
         break;
 
     default:
         console.log("unknown command:\n" + command[1] + " at " + command);
     }
 };
+
+$(document).ready(function() {
+    var cell_count = $(".cell").length;
+    function updateChart() {
+        $('#chartContainer').html("");
+        for (var i = 0; i < cell_count; i++) {
+            var usage = $('#' + i).data("state");
+            $("<div></div>").html(i + ":" + usage).appendTo("#chartContainer");
+        }
+    }
+    window.setInterval(updateChart, CHART_FREQ);
+});
