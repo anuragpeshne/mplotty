@@ -1,7 +1,7 @@
 const STATIC_PORT = 8080;
 const SOCKET_PORT = 8081;
 const REFRESH_DELAY  = 50;
-const SPEED = 100;
+const SPEED = 200;
 
 commandq = [];
 inpEof = false;

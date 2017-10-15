@@ -33,7 +33,7 @@ connection.onmessage = function (message) {
             $('#' + sender_id).addClass("active");
         }
         $('#' + sender_id).data('state', state);
-        $('#' + sender_id).attr('title', state);
+        $('#' + sender_id).attr('title', sender_id + " :" + state + "%");
         break;
 
     case "receive":
@@ -46,7 +46,8 @@ connection.onmessage = function (message) {
             $('#' + receiver_id).addClass("active");
         }
         $('#' + receiver_id).data('state', state);
-        $('#' + receiver_id).attr('title', state);
+        $('#' + receiver_id).attr('title', receiver_id + " :" + state + "%");
+        break;
         break;
 
     default:
